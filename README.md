@@ -13,7 +13,7 @@
     - Describes how the system should *behave* 
     - Availability, reliability, testability, scalability, security, agility, fault tolerance, elasticity, recoverability, performance, deployability, learnability...
 - `Logical components` define its *behavior*
-    - Defining these is one of the key structural activities for architects
+    - **Defining these is one of the key structural activities for architects**
 
 ![](./images/3.png)
 
@@ -59,22 +59,90 @@
 
 ## Chapter 4 - Architectural Characteristics Defined
 
-- `Structual design` is one of the key activites for software architects 
+- `Structural design` is one of the key activites for software architects 
     - Two sub-activities (performed in any other or in parallel):
         - Architectural characteristics analysis
         - Logical component design
 - `Problem domain` aka `domain` is the list of requirements required to solve some problem
 - Software solution consists of both domain requirements and architectural characteristics
+- Architects help define the domain but must also define/discover/analyze the things the software must do that aren't directly related to the domain functionality - these *things* are `architectural characteristics`
+- **Architectural characteristics vs behavior**
+    - Architectural characteristics are referred to as the `capabilities` of the system
+    - The domain represents the system's `behavior`
 
 ### Architectural Characteristics and System Design
 
 - To be considered an architectural characteristic, a requirement must meet 3 criteria
-    - Specify a nondomain design consideration
+    - Specify a *nondomain* design consideration
     - Influence some structural aspect of the design
     - Be critical or important to the application's succes
 - *Nondomain design consideration*
     - Structural design in software architecture consists of two activities by an architect
-        - Understanding the problem domain and uncovering what kinds of "-ilities" the system needs to support to be successful
-        - Domain design considerations cover behavior of the system and architectural characteristics define the "-ilities" (aka capabilities)
-    - Design requirements specify WHAT the applixation should do
+        - Understanding the problem domain
+        - Uncovering what kinds of "-ilities" the system needs to support to be successful
+    - Domain design considerations cover behavior of the system and architectural characteristics define the "-ilities" (aka capabilities)
+    - Design requirements specify WHAT the application should do
     - Architectural characteristics specify HOW to implement the requirements and WHY certain choices were made
+- *An architecture characteristic influences some structural aspect of the design*
+    - Consider scalability, no amount of clever design will allow a monolithic architecture to scale beyond a certain point - system must change to a distributed architectural style
+    - Architects often pay close attention to operational architectural characteristics because they are the characteristics that most often require special structural support
+- *An architecture characteristic must be critical or important to application success*
+
+<br>
+
+- Implicit vs explicit architectural characteristics
+    - Implicit ones rarely appear in requirements yet they're necessary for the project to succeed
+        - Architects must use knowledge of problem domain to uncover these - for example, a stock trading platform requires low latency for fast trades
+    - Explicit characteristics appear in requirements documents or some other specific instructions
+
+### Architectural Characteristics (Partially) Listed
+
+- Architectural characteristics exist a broad spectrum ranging from low-level code characteristics (such as modularity) to sophisticated operational concerns (such as scalability and elasticity)
+
+#### Operational Architectural Characteristics
+
+- Availability
+    - Up time of system
+- Continuity
+- Performance
+    - How well system performs - response times is a common way to do this
+- Recoverability
+- Reliability
+    - Does system need to be fail safe? Is it mission critical? If it fails will it cost the company large sums of money?
+- Robustness
+- Scalability
+    - System's ability to perform and operate as the number of users or requests increases
+
+#### Structural Architectural Characteristics
+
+- Configurability
+    - How easily end users can change aspects of the software's configuration through interfaces
+- Extensibility
+    - How well the architecture accomodates changes that extend its existing functionality
+- Installability
+- Leverability/reuse
+    - Extent to which system's common components can be leveraged across multiple products
+- Localization
+- Maintainability
+    - How easy it is to apply changes and enhance the system
+- Portability
+- Upgradeability
+
+#### Cloud Characteristics
+
+- On-demand scalability
+- On-demand elasticity
+- Zone-based availability
+- Region-based privacy and security
+
+#### Cross-Cutting Architectural Concerns
+
+- Accessibility
+- Archivability
+- Authentication
+- Authorization
+- Legal
+- Privacy
+- Security
+- Supportability
+- Usability
