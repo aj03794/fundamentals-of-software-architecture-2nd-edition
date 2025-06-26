@@ -56,6 +56,11 @@
 
 - Technical breadth becomes more important than technical depth
     - Some areas you will specialize in either out of need or out of interest
+- Thinking like an architect means analyzing trade-offs then asking questions like "which is more important: extensibility or security"
+
+### Understanding Business Drivers
+
+- Thinking like an architect also means understanding the business drivers required for the success of the system and translating those requirements into architecture characteristics
 
 ## Chapter 4 - Architectural Characteristics Defined
 
@@ -70,6 +75,7 @@
     - Architectural characteristics are referred to as the `capabilities` of the system
     - The domain represents the system's `behavior`
 
+
 ### Architectural Characteristics and System Design
 
 - To be considered an architectural characteristic, a requirement must meet 3 criteria
@@ -83,6 +89,7 @@
     - Domain design considerations cover behavior of the system and architectural characteristics define the "-ilities" (aka capabilities)
     - Design requirements specify WHAT the application should do
     - Architectural characteristics specify HOW to implement the requirements and WHY certain choices were made
+    - For example, performance may be an important architectural characteristic, but often don't appear in requirements documents
 - *An architecture characteristic influences some structural aspect of the design*
     - Consider scalability, no amount of clever design will allow a monolithic architecture to scale beyond a certain point - system must change to a distributed architectural style
     - Architects often pay close attention to operational architectural characteristics because they are the characteristics that most often require special structural support
@@ -91,7 +98,7 @@
 <br>
 
 - Implicit vs explicit architectural characteristics
-    - Implicit ones rarely appear in requirements yet they're necessary for the project to succeed
+    - Implicit ones rarely appear in requirements yet they're necessary for the project to succeed (think availability, reliability, and security)
         - Architects must use knowledge of problem domain to uncover these - for example, a stock trading platform requires low latency for fast trades
     - Explicit characteristics appear in requirements documents or some other specific instructions
 
@@ -146,3 +153,30 @@
 - Security
 - Supportability
 - Usability
+
+### Trade-Offs and Least Worst Architecture
+
+- Architects should only support those architectural characteristics that are critical to the system's success
+- Supporting architectural characteristics is expensive
+    - Each architectural characteristic requires design effort from the architect and effort from devs to implement and maintain it
+    - Architectural characteristics interact with each other - improving security can negatively impact performance
+    - Usually there are trade-offs between competing concerns
+
+
+## Chapter 5 - Identifying Architectural Characteristics
+
+- To create an architecture or determine the validity of an existing architecture, architects must analyze two things
+    - Architectural characteristics
+    - Domain
+- Identifying the correct architectural characteristics for a given problem or application requires not only understanding the domain problem but also collaborating with stakeholders to determine what is truly important from a domain perspective
+- At least 3 places to uncover architectural characteristics a project needs
+    - Domain concerns
+    - Project requirements
+    - Implicit domain knowledge
+- Some domains include implicit architectural characteristics
+    - An architect working on medical software that reads from diagnostics equipment should already understand the importance of data integrity and potential consequence of losing messages
+        - Architects who work in that domain internalize data integrity, so it becomes implicit in every solution they design
+
+### Extracting Architectural Characteristics from Domain Concerns
+
+- 
