@@ -10,7 +10,6 @@
 ![](./images/2.png)
 
 - `Architecture characteristics` define the `capabilities` of a system (aka the `-ilities`) and the criteria for success
-    - Describes how the system should *behave* 
     - Availability, reliability, testability, scalability, security, agility, fault tolerance, elasticity, recoverability, performance, deployability, learnability...
 - `Logical components` define its *behavior*
     - **Defining these is one of the key structural activities for architects**
@@ -18,6 +17,7 @@
 ![](./images/3.png)
 
 - One required architectural characteristics are identified and the logical components needed, you can use this as a starting point to choose an appropriate `architecture style` for implementing the solution
+    - **This is what is needed to choose the appropriate architectural style**
 
 ![](./images/4.png)
 
@@ -179,4 +179,33 @@
 
 ### Extracting Architectural Characteristics from Domain Concerns
 
-- 
+- Most architectural characteristics come from listening to key domain stakeholders and collaborating with them to determine what is important forom a business perspective
+    - Architects and domain stakeholdrs speak different languages
+        - Scalability/Availability/Learnability/etc vs Mergers & Acquisitions/User Satisfaction/Time to market/etc
+
+![](./images/5.png)
+
+### Composite Architectural Characteristics
+
+- Common pitfall is making false equivalences when translating domain concerns into architectural characteristics
+    - Like equating agility soley with time to market
+    - Agility is not one thing (there's no measure for it)
+        - Agility is composed of deployability, modularity, and testability
+- Common anti-pattern arises when architects focus narrowly on just one part of a composite
+    - Like focusing on performance but not accounting for the availability is required (doesn't matter how fast the system is if it isn't up, ofr example)
+
+
+### Extracting Architectural Concerns
+
+- Most architectural characteristics come from explicit statements in some form of requirements document
+    - Explict number of expected users and scale
+    - Keep the domain always in mind
+        - Imagine you're designing an application that handles class registration for university students - it's very likely a large number of those students wait until the last moment to sign up
+
+### Implicit Characteristics
+
+- Availability/stability/security are examples of common implicit architectural characteristics
+- *Do not stresss too much about discovering the exactly correct set of architectural characteristics*
+    - Developers can implement functionality in a variety of ways - for example, you could design an architecture that doesn't support customizability structurally, instead requiring the application itself to support that behavior
+- Once first pass is made at identifying architectural characteristics, try to determine the least important one
+    - If you had to elimiate one, what would it be?
