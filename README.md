@@ -62,6 +62,41 @@
 
 - Thinking like an architect also means understanding the business drivers required for the success of the system and translating those requirements into architecture characteristics
 
+## Chapter 3 - Modularity
+
+- `Modularity` is an organizing principle
+- Preservering good modularity is a good example of an implicit architectural characteristic: project requirements don't ask for this but it's required if you wan ta sustainable code base
+
+### Modularity Versus Granularity
+
+- Modularity is about breaking systems apart into smaller pieces - such as moving from a monolithic architecture to a high distributed architecture (like microservices)
+- Granularity is about the size of those pieces - how big a particular part of the system should be
+
+### Defining Modularity
+
+- `Modularity` is a **logical** grouping of related code
+    - Classes in OO language
+    - Group of functions in structured or functional language
+- Use modules as a way to group related code together - `com.mycompany.customer` package in Java should contain things related to customers
+- Modularity doesn't imply physical separation, just logical
+
+### Measuring Modularity
+
+#### Cohesion
+
+- Extent to which a module's parts hould be contained within the same module
+    - Measures how related the parts are to one another
+    - Ideal cohesive module is where all parts are packaged together; breaking them into smaller pieces would require coupling the parts together via calls between modules to achieve useful results
+- Cohesion is a range - below is a least as measured from best to work
+    - Functional cohesion
+    - Sequential cohesion
+    - Communicational cohesion
+    - Procedural cohesion
+    - Temporal cohesion
+    - Logical cohesion
+        - Code within modules is related logically but not functionally 
+        - Common example is `StringUtils` - a group of static methods that operate on `String` but are otherwise unrelated
+
 ## Chapter 4 - Architectural Characteristics Defined
 
 - `Structural design` is one of the key activites for software architects 
