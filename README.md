@@ -12,7 +12,7 @@
 - `Architecture characteristics` define the `capabilities` of a system (aka the `-ilities`) and the criteria for success
     - Availability, reliability, testability, scalability, security, agility, fault tolerance, elasticity, recoverability, performance, deployability, learnability...
 - `Logical components` define its *behavior*
-    - **Defining these is one of the key structural activities for architects**
+    - **Defining these logical components is one of the key structural activities for architects**
 
 ![](./images/3.png)
 
@@ -103,6 +103,7 @@
     - Two sub-activities (performed in any other or in parallel):
         - Architectural characteristics analysis
         - Logical component design
+    - Can be performed in any order (or even in parallel)
 - `Problem domain` aka `domain` is the list of requirements required to solve some problem
 - Software solution consists of both domain requirements and architectural characteristics
 - Architects help define the domain but must also define/discover/analyze the things the software must do that aren't directly related to the domain functionality - these *things* are `architectural characteristics`
@@ -126,6 +127,8 @@
     - Architectural characteristics specify HOW to implement the requirements and WHY certain choices were made
     - For example, performance may be an important architectural characteristic, but often don't appear in requirements documents
 - *An architecture characteristic influences some structural aspect of the design*
+    - Primary reason architects try to describe architectural characteristics is to tease out important design considerations
+        - Can the architect implement it via design or does this architectural characteristics require special structural consideration to succeed
     - Consider scalability, no amount of clever design will allow a monolithic architecture to scale beyond a certain point - system must change to a distributed architectural style
     - Architects often pay close attention to operational architectural characteristics because they are the characteristics that most often require special structural support
 - *An architecture characteristic must be critical or important to application success*
@@ -194,7 +197,7 @@
 - Architects should only support those architectural characteristics that are critical to the system's success
 - Supporting architectural characteristics is expensive
     - Each architectural characteristic requires design effort from the architect and effort from devs to implement and maintain it
-    - Architectural characteristics interact with each other - improving security can negatively impact performance
+    - Architectural characteristics interact with each other - for example, improving security can negatively impact performance
     - Usually there are trade-offs between competing concerns
 
 
@@ -215,7 +218,7 @@
 ### Extracting Architectural Characteristics from Domain Concerns
 
 - Most architectural characteristics come from listening to key domain stakeholders and collaborating with them to determine what is important forom a business perspective
-    - Architects and domain stakeholdrs speak different languages
+    - Architects and domain stakeholders speak different languages
         - Scalability/Availability/Learnability/etc vs Mergers & Acquisitions/User Satisfaction/Time to market/etc
 
 ![](./images/5.png)
