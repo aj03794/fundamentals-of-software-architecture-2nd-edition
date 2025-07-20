@@ -8,6 +8,8 @@
 
 - `Architectural quantum` - an independently deployable artifact with high functional cohesion and synchronous dynamic coupling
     - `Quantum` here meaning smallest thing that can stand alone in an architecture
+    - *Dynamic coupling* describes the forces involved when architecture quanta must communicate with each other
+        - For example, when two services are running, they must communicate to form workflows and perform tasks within the system
 - Architecture characteristics live at the quantum level
 
 - Example
