@@ -29,7 +29,7 @@
 
 ![](./images/7.png)
 
-- In the above example, we have two architectural quanta
+- In the above example, we have two architectural quantam
     - These two likely have very different architectural characteristics
     - On right side, we have some sync and async communication
 - How does the order placement service communicate with the order placement orchestrator - sync or async?

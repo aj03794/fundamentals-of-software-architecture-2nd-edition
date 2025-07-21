@@ -42,3 +42,4 @@
     - Suggested using request/reply messaging for inter-service communication to create a sort of private API
         - Public API may have much more information than needed - bandwidth concerns, stamp coupling, etc
         - Why not use GraphQL and people can ask for what they what?
+        

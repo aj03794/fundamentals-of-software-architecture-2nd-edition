@@ -247,3 +247,54 @@
     - Developers can implement functionality in a variety of ways - for example, you could design an architecture that doesn't support customizability structurally, instead requiring the application itself to support that behavior
 - Once first pass is made at identifying architectural characteristics, try to determine the least important one
     - If you had to elimiate one, what would it be?
+
+## Chapter 7 - The Scope of Architectural Characteristics
+
+- Many modern architectures, like microservices, contain different architecture characteristics at the service and system levels
+
+### Architectural Quanta and Granularity
+
+- Many business concepts bind parts of the system together sematically, creating *functional cohesion*
+- **An architecture quantum establishes the scope for a set of architectural characteristics** - it features:
+    - Independent deployment from other parts of the architecture
+    - High functional cohesion
+    - Low external implementation static couplin
+    - Synchronous communication with other quanta
+- *Establishes the scope for a set of architectural characteristics*
+    - Architects use the architecture quantum as a boundary for delineating a set of architectural characteristics, usually operational ones
+- *Independently deployable*
+    - An architecture quantum includes all the necessary components to function independently from other parts 
+    - For example, if an application uses a databsae, the db is part of the quantum, because the system won't function without it
+    - In the microservices architecture, each service has its own db which creates multiple quanta within a single architecture
+- *High functional cohesion*
+    - *Cohesion* in component design refers to how unified the contained is in its purpose
+    - High functional cohesion implies that an architecture quantum does something purposeful
+    - In distributed architectures like event-driven or microservices, architects are more likely to design each service to match a single workflow, so that service would exhibit high functional cohesion
+- Following are different types of coupling
+    - *Semantic coupling*
+        - Natural coupling of the problem for which an architect is building a solution
+        - An order processing application's semantic coupling includes things like inventory, item catalog, shopping carts, customers, and sales
+    - *Implementation coupling*
+        - Describes how an architect and team decide to implement particular dependencies
+        - In an order processing application, team must consider variety of constrains in setting domain boundaries
+            - Should all data reside in single db?
+            - Does a monolith or distributed architecture make sense
+            - Answer these these questions have little effect on system's semantic coupling but greatly affect architectural decisions
+    - *Static coupling*
+        - Refers to "wiring" of architecture - how seervices depend on each other
+        - 2 services are part of the same architecture quantum if they both depend on the same coupling point
+        - For example, microservices `Catalog` and `Shipping` need to share address information, so they both create a dependency to a shared component
+            - Because both services are coupled to that dependency, they are part of the same architecture quantum
+    - *Dynamic coupling*
+        - Describes forces involved when architectural quanta must communicate with each other
+        - For example, when two services are runnings, they must communicate to form workflows and perform tasks in the system 
+- *Low external implementation static coupling*
+    - Characteristic dervied from the DDD philosophy of low coupling between bounded contexts
+    - COME BACK TO THIS, STILL DON'T UNDERSTAND
+
+
+### Impact of Scoping
+
+- *Architects can use the scope of architectural characteristics to help determine appropriate service boundaries*
+
+![](./images/6.png)
