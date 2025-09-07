@@ -255,6 +255,7 @@
 ### Architectural Quanta and Granularity
 
 - Many business concepts bind parts of the system together sematically, creating *functional cohesion*
+    - In simpler language...shared business concepts make different parts of your system related in purpose and meaning, so they naturally work together toward the same functionality
 - **An architecture quantum establishes the scope for a set of architectural characteristics** - it features:
     - Independent deployment from other parts of the architecture
     - High functional cohesion
