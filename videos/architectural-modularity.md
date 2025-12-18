@@ -1,12 +1,14 @@
 # Architectural Modularity
 
+https://developertoarchitect.com/lessons/lesson211.html
+
 - Modularity is about a single system into smaller independently deployable units of software
 - Granularity is about the size of those pieces
 - `Embrace modularity, but beware of granularity`
 
 <br>
 
-- Common right now in industry to take monolith and break into something like microservices
+- Common right now in industry to take monolith and break into something like service based, microservices, event driven, etc
 - Why is achitectural modularity important?
     - `Maintainability` - ease of which to locate and apply changes in our system
         - Difficult in a monolith sometimes
@@ -28,4 +30,3 @@
 ![](./images/21.png)
 
 - When this happens, you lose maintainability, testability, deployability, scalability, fault tolerance
-- 

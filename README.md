@@ -259,7 +259,7 @@
 - **An architecture quantum establishes the scope for a set of architectural characteristics** - it features:
     - Independent deployment from other parts of the architecture
     - High functional cohesion
-    - Low external implementation static couplin
+    - Low external implementation static coupling
     - Synchronous communication with other quanta
 - *Establishes the scope for a set of architectural characteristics*
     - Architects use the architecture quantum as a boundary for delineating a set of architectural characteristics, usually operational ones
@@ -299,3 +299,67 @@
 - *Architects can use the scope of architectural characteristics to help determine appropriate service boundaries*
 
 ![](./images/6.png)
+
+
+## Chapter 9 - Foundations
+
+### Styles vs Patterns
+
+### Fundamental Patterns
+
+- Layered architecture is unique because it can show up as both a style and a pattern
+    - For example, it's a **style** when your entire system (the monolith) is organized by technical layers
+    - For example, it's a **pattern** when you have a microservice style but then each individual deployable is organized by technical layering
+
+### Architecture Partitioning
+
+- Top-level partitioning
+    - Highest level decision about how to organize code and system
+    - Critical decision that is hard to change later
+    - Technical partitioning vs domain partitioning (aka organizing by feature) are 2 common partitioning 
+- **THIS IS ONE OF THE FIRST DECISIONS AN ARCHITECT MUST MAKE**
+- Domain partitioning is inspired by DDD
+    - Architect identifies workflows or domains that are independent and decoupled from each other
+        - Microservices architectural style is inspired by this 
+    - With domain level paritioning, you will still have technical layers inside of top level domain paritioned set of components
+        - For example in image below, `CatalogCheckout` could still have technical layer partitioning inside of it
+        - Each component may have layers inside of it 
+- With domain partitioning, your components are more aligned to reflect the types of changes that usually occur (feature changes/requests)
+
+![](./images/7.png)
+
+- With technical partitioning, a workflow is spread across the technical 
+    - Hard to find all the code related to `CatalogCheckout` in technical partitioning but it's easy to find all SQL code, for example
+
+![](./images/8.png)
+
+#### Kata: Silicon Sandwiches - Partitioning
+
+![](./images/9.png)
+
+![](./images/10.png)
+
+##### Domain Partitioning
+
+- Advantages
+    - Modeled more closely on how the business funcitons rather than on the implementation detail
+    - Easier to build cross-functional teams around domains
+    - Aligns more closely to the modular monolith and microservices architecture styles
+    - Messages flow matches the problem domain
+    - Easy to migrate data and components to a distributed architecture
+
+- Disadvantage
+    - Customaization code appears in multiple places
+
+##### Technical Partitioning
+
+- Technically partitioned architecture separate top-level components based on technical capabilities rather than discrete workflows
+- Advantages
+    - Clearly separates customization code
+    - Aligns more closely to the layered architecture pattern
+- Disadvantages
+    - Higher degree of global coupling. Changes to `Common` or `Local` component will likely affect all the other components 
+    - Developers may haver to duplicate domain concepts in both the Common and Local layers
+    - Typically higher coupling at the data level
+
+## Chapter 14 - 
