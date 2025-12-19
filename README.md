@@ -255,7 +255,9 @@
 ### Architectural Quanta and Granularity
 
 - Many business concepts bind parts of the system together sematically, creating *functional cohesion*
-    - In simpler language...shared business concepts make different parts of your system related in purpose and meaning, so they naturally work together toward the same functionality
+    - In the real world (the business domain), certain concepts are tied together by definition - you cannot have one without the other. For example, to have a "refund", you must've had "payment" from the customer first
+    - Because `refund` and `payment` are tied together in the real world, you should group them togetehr in your code
+- An architecture quantum includes ALL NECESSARY components to function independently...if an application uses a database, that database is part of the quantum, because the system WILL NOT function without it
 - **An architecture quantum establishes the scope for a set of architectural characteristics** - it features:
     - Independent deployment from other parts of the architecture
     - High functional cohesion
@@ -270,23 +272,31 @@
 - *High functional cohesion*
     - *Cohesion* in component design refers to how unified the contained is in its purpose
     - High functional cohesion implies that an architecture quantum does something purposeful
-    - In distributed architectures like event-driven or microservices, architects are more likely to design each service to match a single workflow, so that service would exhibit high functional cohesion
+    - **In distributed architectures like event-driven or microservices, architects are more likely to design each service to match a single workflow, so that service would exhibit high functional cohesion**
 - Following are different types of coupling
     - *Semantic coupling*
+        - *Inherent, natural connections within the business problem itself, regardless of code*
         - Natural coupling of the problem for which an architect is building a solution
         - An order processing application's semantic coupling includes things like inventory, item catalog, shopping carts, customers, and sales
     - *Implementation coupling*
+        - *Refers to the connections created by how the team decides to build the solution*
         - Describes how an architect and team decide to implement particular dependencies
         - In an order processing application, team must consider variety of constrains in setting domain boundaries
             - Should all data reside in single db?
             - Does a monolith or distributed architecture make sense
-            - Answer these these questions have little effect on system's semantic coupling but greatly affect architectural decisions
+            - **Answer these these questions have little effect on system's semantic coupling but greatly affect architectural decisions**
     - *Static coupling*
-        - Refers to "wiring" of architecture - how seervices depend on each other
-        - 2 services are part of the same architecture quantum if they both depend on the same coupling point
+        - Refers to "wiring" of architecture - how services depend on each other
+            - **The "wiring" defines what a service needs in order to exist or start up (like shared DB example)**
+        - 2 services are part of the same architecture quantum if they both depend on the same coupling point- such as a DB
         - For example, microservices `Catalog` and `Shipping` need to share address information, so they both create a dependency to a shared component
             - Because both services are coupled to that dependency, they are part of the same architecture quantum
+        - Two things are coupled if changing one might break the other
+            - If component A is wired to Component B, the "scope" of that part of the system now includes BOTH A and B (they are not independent)
+            - For example, if 2 services share the same database, if the database goes down, both services go down (**they share the same availability scope**)
+                - If Service A gets 1 million hits and overloads database, service B slows down (**they share the same performance scope**)
     - *Dynamic coupling*
+        - App can start up even if an application it depends on doesn't exist - that call will just fail during runtime
         - Describes forces involved when architectural quanta must communicate with each other
         - For example, when two services are runnings, they must communicate to form workflows and perform tasks in the system 
 - *Low external implementation static coupling*
@@ -319,9 +329,9 @@
     - Technical partitioning vs domain partitioning (aka organizing by feature) are 2 common partitioning 
 - **THIS IS ONE OF THE FIRST DECISIONS AN ARCHITECT MUST MAKE**
 - Domain partitioning is inspired by DDD
-    - Architect identifies workflows or domains that are independent and decoupled from each other
+    - Architect identifies workflows or domains that are independent and decoupled from each other (usually these workflows identifies as verbs when talking with business - see Kata below)
         - Microservices architectural style is inspired by this 
-    - With domain level paritioning, you will still have technical layers inside of top level domain paritioned set of components
+    - With domain level paritioning, you may still have technical layers inside of top level domain partitioned set of components
         - For example in image below, `CatalogCheckout` could still have technical layer partitioning inside of it
         - Each component may have layers inside of it 
 - With domain partitioning, your components are more aligned to reflect the types of changes that usually occur (feature changes/requests)
@@ -329,6 +339,7 @@
 ![](./images/7.png)
 
 - With technical partitioning, a workflow is spread across the technical 
+    - Technical partitioning puts code together based on what it is - presentation, business logic, persistence, etc)
     - Hard to find all the code related to `CatalogCheckout` in technical partitioning but it's easy to find all SQL code, for example
 
 ![](./images/8.png)
