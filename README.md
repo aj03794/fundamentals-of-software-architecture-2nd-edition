@@ -252,6 +252,8 @@
 
 - Many modern architectures, like microservices, contain different architecture characteristics at the service and system levels
 
+- See [](./videos/dynamic-quantum-entangelement.md) for some extra details
+
 ### Architectural Quanta and Granularity
 
 - Many business concepts bind parts of the system together sematically, creating *functional cohesion*
@@ -273,7 +275,7 @@
     - *Cohesion* in component design refers to how unified the contained is in its purpose
     - High functional cohesion implies that an architecture quantum does something purposeful
     - **In distributed architectures like event-driven or microservices, architects are more likely to design each service to match a single workflow, so that service would exhibit high functional cohesion**
-- Following are different types of coupling
+- Following are different types of coupling:
     - *Semantic coupling*
         - *Inherent, natural connections within the business problem itself, regardless of code*
         - Natural coupling of the problem for which an architect is building a solution
@@ -283,12 +285,12 @@
         - Describes how an architect and team decide to implement particular dependencies
         - In an order processing application, team must consider variety of constrains in setting domain boundaries
             - Should all data reside in single db?
-            - Does a monolith or distributed architecture make sense
-            - **Answer these these questions have little effect on system's semantic coupling but greatly affect architectural decisions**
+            - Does a monolith or distributed architecture make sense?
+            - **Answer to these questions have little effect on system's semantic coupling but greatly affect architectural decisions**
     - *Static coupling*
         - Refers to "wiring" of architecture - how services depend on each other
             - **The "wiring" defines what a service needs in order to exist or start up (like shared DB example)**
-        - 2 services are part of the same architecture quantum if they both depend on the same coupling point- such as a DB
+        - 2 services are part of the same architecture quantum if they both depend on the same coupling point - such as a DB
         - For example, microservices `Catalog` and `Shipping` need to share address information, so they both create a dependency to a shared component
             - Because both services are coupled to that dependency, they are part of the same architecture quantum
         - Two things are coupled if changing one might break the other
@@ -296,19 +298,57 @@
             - For example, if 2 services share the same database, if the database goes down, both services go down (**they share the same availability scope**)
                 - If Service A gets 1 million hits and overloads database, service B slows down (**they share the same performance scope**)
     - *Dynamic coupling*
-        - App can start up even if an application it depends on doesn't exist - that call will just fail during runtime
         - Describes forces involved when architectural quanta must communicate with each other
-        - For example, when two services are runnings, they must communicate to form workflows and perform tasks in the system 
+        - App can start up even if an application it depends on doesn't exist - that call will just fail during runtime
+            - For example, when two services are runnings, they must communicate to form workflows and perform tasks in the system 
 - *Low external implementation static coupling*
+    - **NOTE, we should limit the below when communicating between Quanta**
+    - *External* - rule applies to space between Quanta
+    - *Implementation* - specific implementation of the business problem
+    - *Static Coupling* - hard dependencies thta exist at compile/deploy time
+    - *Low* - want as little as possible of all of this
+    - What this really means is it has its own db and no shared internals (as much as it can be limited)
     - Characteristic dervied from the DDD philosophy of low coupling between bounded contexts
     - COME BACK TO THIS, STILL DON'T UNDERSTAND
 
+### Synchronous Communication
+
+- **Communication** refers to dynamic coupling - when architecture quantas call each other (common in distributed architecture)
+- *This particularly concerns the operational architectual characteristics family*
+    - Usually this tightly couples operational characteristics of the two services
+    - If service B is slow or down, service A can be slow or broken
+- Problematic scenario
+    - Payment Service and Auction Service
+    - When auction ends, `Auction` service sends payment information synchronously to `Payment` service
+    - `Payment` service can only handle one payment every 500ms
+    - What happens when many payments required at once?
+    - The two services have different operational architectural characteristics
+- Async communication is more forgiving in distributed architectures since a queue can be used to decouple the two
+- **In modern systems, architects define architectural characteristics at the quantum level rather than at the system level**
 
 ### Impact of Scoping
 
 - *Architects can use the scope of architectural characteristics to help determine appropriate service boundaries*
 
 ![](./images/6.png)
+
+#### Scoping and Architectural Style
+
+- **Determine the quantum boundaries of the problem domain helps in choosing an architectural style**
+- Step 1 is analyze domain to determine most appropriate architectural style
+    - Does this solution require multiple different groups of architectural characteristics (monolith vs distributed)
+
+![](./images/11.png)
+
+- If distributed aarchitecture is required, next step is to determine its quantum boundaries
+
+![](./images/12.png)
+
+- Next choice is choosing persistence which concerns both monolith and distributed architecture
+    - For a monolith, typically single monolithic db
+    - For distributed, you can use a single db (common in event driven) or partition the data along the lines of service granularity (microservices)
+- Final step is determing communication to use between quanta (sync or async)
+     - If you choose synchronous communication, it can change quantum boundaries 
 
 
 ## Chapter 9 - Foundations
